@@ -2,23 +2,23 @@ package home
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/samsoft00/golang-starter/service/lib/logger"
 	"go.uber.org/fx"
-	"go.uber.org/zap"
 	"net/http"
 )
 
 type ControllerDeps struct {
 	fx.In
 
-	Logger *zap.Logger
+	Logger *logger.WithLogger
 }
 
 type Controller struct {
-	logger *zap.Logger
+	*logger.WithLogger
 }
 
 func NewController(deps ControllerDeps) *Controller {
-	return &Controller{logger: deps.Logger}
+	return &Controller{WithLogger: deps.Logger}
 }
 
 func (c *Controller) DefaultDisplay(g *gin.Context) {
